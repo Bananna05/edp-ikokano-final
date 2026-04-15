@@ -171,12 +171,17 @@ function ManageBookings() {
       setBookings((prev) => [newBooking, ...prev])
     }
 
+    // Dispatch custom event to notify other components
+    window.dispatchEvent(new CustomEvent('bookingsUpdated'));
+
     setIsModalOpen(false)
   }
 
   const handleDelete = (id, name) => {
     if (window.confirm(`Are you sure you want to delete the booking for ${name}?`)) {
       setBookings((prev) => prev.filter((booking) => booking.id !== id))
+      // Dispatch custom event to notify other components
+      window.dispatchEvent(new CustomEvent('bookingsUpdated'));
     }
   }
 
